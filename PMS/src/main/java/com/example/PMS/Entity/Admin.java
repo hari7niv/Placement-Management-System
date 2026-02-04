@@ -32,5 +32,4 @@ public class Admin {
 
     @CreationTimestamp
     private LocalDateTime created_at;
-
 }

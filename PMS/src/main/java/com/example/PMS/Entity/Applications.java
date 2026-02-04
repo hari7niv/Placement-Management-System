@@ -22,7 +22,7 @@ public class Applications {
     private Long student_id;
 
     @ManyToOne
-    @JoinColumn(name = "drive_id", nullable = false)
+    @JoinColumn(name = "drive_id")
     private JobDrives drive;
 
     @CreationTimestamp

@@ -7,38 +7,31 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
+
 
 @Entity
 @Data
 public class JobDrives {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long drive_id  ;
+    private Long drive_id;
 
-    private String job_role ;
-
-
+    private String job_role;
     private Integer package_lpa;
-
     private String eligible_branches;
-
-   
-    private Integer min_cgpa ;
-
+    private Integer min_cgpa;
     private Integer max_backlogs;
-
     private LocalDate drive_date;
-
     private LocalDate application_deadline;
 
-    @OneToMany
-    @JoinColumn(name="company_id")
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Companies company;
 
-    @OneToMany
-    @JoinColumn(name="admin_id")
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
     private Admin created_by;
-
 }

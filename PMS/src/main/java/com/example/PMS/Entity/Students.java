@@ -45,5 +45,20 @@ public class Students {
     @CreationTimestamp
     private LocalDateTime created_at;
 
-
 }
+
+
+// {
+//   "reference_number": "24017937",
+//   "first_name": "karthik",
+//   "last_name": "E",
+//   "email": "karthil@gmail.com",
+//   "password_hash": "1234",
+//   "phone_number": "9828944085",
+//   "branch": "CSE",
+//   "Year": 2,
+//   "cgpa": 8.0,
+//   "is_verified": true,
+//   "resume_link":"",
+//   "backlog_count":0
+// }
