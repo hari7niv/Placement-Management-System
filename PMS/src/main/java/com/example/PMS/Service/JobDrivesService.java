@@ -22,4 +22,7 @@ public class JobDrivesService {
     public List<JobDrives> ViewAll(){
         return repo.findAll();
     }
+    public JobDrives getJobDrives(Long id){
+        return repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+    }
 }
