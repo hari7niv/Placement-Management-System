@@ -25,4 +25,12 @@ public class JobDrivesService {
     public JobDrives getJobDrives(Long id){
         return repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
     }
+    public JobDrives updateJobDrives(UpdateDrives drive, Long id){
+        JobDrives job = repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+        job.setJob_role(drive.getJob_role());
+        job.setPackage_lpa(drive.getPackage_lpa());
+        job.setMin_cgpa(drive.getMin_cgpa());
+        job.setEligible_branches(drive.getEligible_branches());
+        return job;
+    }
 }
