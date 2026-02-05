@@ -1,6 +1,5 @@
 package com.example.PMS.Controller;
 
-<<<<<<< HEAD
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
@@ -8,10 +7,8 @@ import com.example.PMS.Service.JobDrivesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-=======
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> 28adb7cb819dffec89b437096b797e70ef4b9833
 
 @RestController
 @RequestMapping("/drives")
@@ -24,32 +21,32 @@ public class JobDrivesController {
     }
 
     @PostMapping
-    public JobDrives createJobDrive(@RequestBody JobDrives job){
-        return  service.createJobDrive(job);
+    public JobDrives createJobDrive(@RequestBody JobDrives job) {
+        return service.createJobDrive(job);
     }
 
     @GetMapping
-    public List<JobDrives> ViewAll(){
+    public List<JobDrives> ViewAll() {
         return service.ViewAll();
     }
 
     @GetMapping("/{id}")
-    public JobDrives getJobDrives(@PathVariable Long id){
+    public JobDrives getJobDrives(@PathVariable Long id) {
         return service.getJobDrives(id);
     }
 
     @PutMapping("/{driveId}")
-    public JobDrives updateJobDrives(@RequestBody UpdateDrives drive, Long driveId){
+    public JobDrives updateJobDrives(@RequestBody UpdateDrives drive, Long driveId) {
         return service.updateJobDrives(drive, driveId);
     }
 
     @DeleteMapping("/{driveId}")
-    public String deleteJobDrives(Long driveId){
+    public String deleteJobDrives(Long driveId) {
         return service.deleteJobDrives(driveId);
     }
 
     @GetMapping("/verified-students")
-    public List<Students> getEligibleStudents(){
+    public List<Students> getEligibleStudents() {
         return service.getEligibleStudents();
     }
 }
