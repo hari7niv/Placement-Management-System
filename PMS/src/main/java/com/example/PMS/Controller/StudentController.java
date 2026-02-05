@@ -23,7 +23,7 @@ public class StudentController {
     }
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest entity) {
-        return service.login(entity.getEmail(), entity.getPassword());
+        return service.login(entity);
     }
     @GetMapping("/list")
     public List<Students> get(){
