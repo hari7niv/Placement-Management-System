@@ -1,5 +1,6 @@
 package com.example.PMS.Controller;
 
+<<<<<<< HEAD
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
@@ -7,6 +8,10 @@ import com.example.PMS.Service.JobDrivesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> 28adb7cb819dffec89b437096b797e70ef4b9833
 
 @RestController
 @RequestMapping("/drives")
