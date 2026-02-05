@@ -1,6 +1,5 @@
 package com.example.PMS.Service;
 
-
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
@@ -20,30 +19,36 @@ public class JobDrivesService {
         this.repo = repo;
     }
 
-    public JobDrives createJobDrive(JobDrives job){
+    public JobDrives createJobDrive(JobDrives job) {
         return repo.save(job);
     }
-    public List<JobDrives> ViewAll(){
+
+    public List<JobDrives> ViewAll() {
         return repo.findAll();
     }
-    public JobDrives getJobDrives(Long id){
-        return repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+
+    public JobDrives getJobDrives(Long id) {
+        return repo.findById(id).orElseThrow(() -> new RuntimeException("Job Drives not found"));
     }
-    public JobDrives updateJobDrives(UpdateDrives drive, Long id){
-        JobDrives job = repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+
+    public JobDrives updateJobDrives(UpdateDrives drive, Long id) {
+        JobDrives job = repo.findById(id).orElseThrow(() -> new RuntimeException("Job Drives not found"));
         job.setJob_role(drive.getJob_role());
         job.setPackage_lpa(drive.getPackage_lpa());
         job.setMin_cgpa(drive.getMin_cgpa());
         job.setEligible_branches(drive.getEligible_branches());
         return job;
     }
-    public String deleteJobDrives(Long id){
+
+    public String deleteJobDrives(Long id) {
         repo.deleteById(id);
         return "Deleted successfully";
     }
+
     @Autowired
     StudentRepository studentRepository;
-    public List<Students> getEligibleStudents(){
+
+    public List<Students> getEligibleStudents() {
         return studentRepository.getVerifiedStudents();
     }
 }
