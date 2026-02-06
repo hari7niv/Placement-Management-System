@@ -18,12 +18,14 @@ public class JobDrivesService {
         this.repo = repo;
     }
 
-<<<<<<< HEAD
+    <<<<<<<HEAD
+
     public JobDrives createJobDrive(JobDrives job){
         job.setEligible_branches(
                 job.getEligible_branches().replace(" ", ",")
         );
 =======
+
     public JobDrives createJobDrive(JobDrives job) {
 >>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return repo.save(job);
@@ -54,18 +56,13 @@ public class JobDrivesService {
 
     @Autowired
     StudentRepository studentRepository;
-<<<<<<< HEAD
-    public List<Students> getVerifiedStudents(){
-=======
 
-    public List<Students> getEligibleStudents() {
->>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
+    public List<Students> getVerifiedStudents() {
         return studentRepository.getVerifiedStudents();
     }
 
-    public List<Students> getEligibleStudents(){
+    public List<Students> getEligibleStudents() {
         return studentRepository.getEligibleStudents();
     }
-
 
 }
