@@ -34,7 +34,7 @@ public class StudentService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        return "Login successful for: " + student.getEmail();
+        return "Login successful for: " + student.getFirst_name();
     }
 
     public List<Students> getAllStudents() {

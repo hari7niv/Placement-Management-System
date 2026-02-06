@@ -8,7 +8,6 @@ import com.example.PMS.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.View;
 import java.util.List;
 
 @Service
@@ -19,7 +18,14 @@ public class JobDrivesService {
         this.repo = repo;
     }
 
+<<<<<<< HEAD
+    public JobDrives createJobDrive(JobDrives job){
+        job.setEligible_branches(
+                job.getEligible_branches().replace(" ", ",")
+        );
+=======
     public JobDrives createJobDrive(JobDrives job) {
+>>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return repo.save(job);
     }
 
@@ -37,6 +43,7 @@ public class JobDrivesService {
         job.setPackage_lpa(drive.getPackage_lpa());
         job.setMin_cgpa(drive.getMin_cgpa());
         job.setEligible_branches(drive.getEligible_branches());
+        repo.save(job);
         return job;
     }
 
@@ -47,8 +54,18 @@ public class JobDrivesService {
 
     @Autowired
     StudentRepository studentRepository;
+<<<<<<< HEAD
+    public List<Students> getVerifiedStudents(){
+=======
 
     public List<Students> getEligibleStudents() {
+>>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return studentRepository.getVerifiedStudents();
     }
+
+    public List<Students> getEligibleStudents(){
+        return studentRepository.getEligibleStudents();
+    }
+
+
 }
