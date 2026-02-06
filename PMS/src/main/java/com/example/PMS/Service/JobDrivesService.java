@@ -1,14 +1,15 @@
 package com.example.PMS.Service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Repository.JobDrivesRepository;
 import com.example.PMS.Repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 @Service
 public class JobDrivesService {
 
