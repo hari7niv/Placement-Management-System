@@ -29,8 +29,9 @@ public class ApplicationsController {
         return applicationService.applyForJob(app);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/get/{aid}")
     public List<ApplicationDTO> getDet(@PathVariable Long aid) {
         return applicationService.getDet(aid);
     }
+
 }
