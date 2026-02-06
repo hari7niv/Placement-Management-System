@@ -7,15 +7,6 @@ import com.example.PMS.Service.JobDrivesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-<<<<<<< HEAD
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-=======
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
 
 @RestController
 @RequestMapping("/drives")
@@ -53,16 +44,12 @@ public class JobDrivesController {
     }
 
     @GetMapping("/verified-students")
-<<<<<<< HEAD
-    public List<Students> getVerifiedStudents(){
+    public List<Students> getVerifiedStudents() {
         return service.getVerifiedStudents();
     }
 
     @GetMapping("/students/eligible")
-    public List<Students> getEligibleStudents(){
-=======
     public List<Students> getEligibleStudents() {
->>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return service.getEligibleStudents();
     }
 }
