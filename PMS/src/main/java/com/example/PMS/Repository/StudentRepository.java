@@ -12,4 +12,8 @@ public interface StudentRepository extends JpaRepository<Students, Long> {
     Optional<Students> findByEmail(String email);
     @Query(value = "Select * from Students where is_verified=true;", nativeQuery = true)
     List<Students> getVerifiedStudents();
+
+    @Query(value = "Select s.* from Students s join JobDrives j on s.cgpa>=j.min_cgpa and s.backlog_count <= j.max_backlogs and FIND_IN_SET(LOWER(s.branch), LOWER(j.eligible_branches))",nativeQuery = true)
+    List<Students> getEligibleStudents();
+
 }

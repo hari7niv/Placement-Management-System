@@ -37,7 +37,7 @@ public class Students {
 
     private Double cgpa;
 
-    private String backlog_count;
+    private Integer backlog_count;// change panniruka da error varum apparam aluvada poi inda table a delete pannu ok va
     private String resume_link;
 
     private Boolean is_verified;
