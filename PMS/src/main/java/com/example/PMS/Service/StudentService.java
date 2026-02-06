@@ -2,11 +2,12 @@ package com.example.PMS.Service;
 
 import java.util.List;
 
-import com.example.PMS.DTO.LoginRequest;
-import com.example.PMS.DTO.UpdateProfileRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.PMS.DTO.LoginRequest;
+import com.example.PMS.DTO.UpdateProfileRequest;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Repository.StudentRepository;
 
