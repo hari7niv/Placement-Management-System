@@ -24,7 +24,29 @@ public class ApplicationsService {
 
     public List<ApplicationDTO> getDet(Long id) {
         return appRepo.findById(id).stream()
-                .map(user -> new ApplicationDTO(user.getAid(), user.getSid(), user.getApplied_at()))
+                .map(user -> new ApplicationDTO(user.getAid(), user.getStudent().getStudent_id(), user.getApplied_at()))
                 .collect(Collectors.toList());
+    }
+
+    public String updateApplication(Long aid, Applications app) {
+        // return appRepo.findById(aid).map(obj->{
+        // obj.setStudent(app.getStudent());
+        // obj.setDrive(app.getDrive());
+        // appRepo.save(obj);
+        // return "Updated Successfully";
+        // }).orElse("ERROR: ID NOT FOUND");
+
+        // OR
+
+        if (appRepo.findById(aid).isEmpty()) {
+            return "ERROR: ID NOT FOUND";
+        } else {
+            Applications obj = appRepo.findById(aid).get();
+            obj.setStudent(app.getStudent());
+            obj.setDrive(app.getDrive());
+            appRepo.save(obj);
+            return "Updated Successfully";
+        }
+
     }
 }

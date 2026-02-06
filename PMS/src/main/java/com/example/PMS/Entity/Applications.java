@@ -19,7 +19,9 @@ public class Applications {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long aid;
 
-    private Long sid;
+    @ManyToOne
+    @JoinColumn(name = "sid", referencedColumnName = "student_id")
+    private Students student;
 
     @ManyToOne
     @JoinColumn(name = "drive_id")
