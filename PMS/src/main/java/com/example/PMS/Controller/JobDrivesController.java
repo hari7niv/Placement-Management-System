@@ -1,12 +1,21 @@
 package com.example.PMS.Controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.PMS.DTO.EligibleStudentDTO;
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Service.JobDrivesService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/drives")
@@ -34,12 +43,12 @@ public class JobDrivesController {
     }
 
     @PutMapping("/{driveId}")
-    public JobDrives updateJobDrives(@RequestBody UpdateDrives drive, Long driveId) {
+    public JobDrives updateJobDrives(@RequestBody UpdateDrives drive, @PathVariable Long driveId) {
         return service.updateJobDrives(drive, driveId);
     }
 
     @DeleteMapping("/{driveId}")
-    public String deleteJobDrives(Long driveId) {
+    public String deleteJobDrives(@PathVariable Long driveId) {
         return service.deleteJobDrives(driveId);
     }
 
@@ -49,7 +58,7 @@ public class JobDrivesController {
     }
 
     @GetMapping("/students/eligible")
-    public List<Students> getEligibleStudents() {
+    public List<EligibleStudentDTO> getEligibleStudents() {
         return service.getEligibleStudents();
     }
 }

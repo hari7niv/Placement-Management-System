@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.PMS.DTO.EligibleStudentDTO;
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
@@ -59,7 +60,7 @@ public class JobDrivesService {
         return studentRepository.getVerifiedStudents();
     }
 
-    public List<Students> getEligibleStudents(){
+    public List<EligibleStudentDTO> getEligibleStudents(){
         return studentRepository.getEligibleStudents();
     }
 }
