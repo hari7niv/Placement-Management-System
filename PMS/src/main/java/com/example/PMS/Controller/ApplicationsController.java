@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.PMS.DTO.ApplicationDTO;
+import com.example.PMS.DTO.*;
+
 import com.example.PMS.Entity.Applications;
 import com.example.PMS.Service.ApplicationsService;
 

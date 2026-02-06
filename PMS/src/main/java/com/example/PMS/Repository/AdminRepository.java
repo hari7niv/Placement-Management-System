@@ -1,7 +1,6 @@
 package com.example.PMS.Repository;
 
 import com.example.PMS.Entity.Admin;
-import com.example.PMS.Entity.Students;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

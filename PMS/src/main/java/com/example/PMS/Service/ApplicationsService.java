@@ -1,8 +1,8 @@
 package com.example.PMS.Service;
 
-import com.example.PMS.DTO.ApplicationDTO;
+import com.example.PMS.DTO.*;
 import com.example.PMS.Entity.Applications;
-import com.example.PMS.Repository.ApplicationStatusRepository;
+import com.example.PMS.Repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 @Service
 public class ApplicationsService {
 
-    private final ApplicationStatusRepository appRepo;
+    private final ApplicationRepository appRepo;
 
-    public ApplicationsService(ApplicationStatusRepository appRepo) {
+    public ApplicationsService(ApplicationRepository appRepo) {
         this.appRepo = appRepo;
     }
 
