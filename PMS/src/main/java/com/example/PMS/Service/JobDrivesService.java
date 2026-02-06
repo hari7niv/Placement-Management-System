@@ -18,16 +18,9 @@ public class JobDrivesService {
         this.repo = repo;
     }
 
-    <<<<<<<HEAD
-
-    public JobDrives createJobDrive(JobDrives job){
-        job.setEligible_branches(
-                job.getEligible_branches().replace(" ", ",")
-        );
-=======
-
     public JobDrives createJobDrive(JobDrives job) {
->>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
+        job.setEligible_branches(
+                job.getEligible_branches().replace(" ", ","));
         return repo.save(job);
     }
 
