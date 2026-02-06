@@ -1,6 +1,5 @@
 package com.example.PMS.Service;
 
-
 import com.example.PMS.DTO.UpdateDrives;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
@@ -19,20 +18,27 @@ public class JobDrivesService {
         this.repo = repo;
     }
 
+<<<<<<< HEAD
     public JobDrives createJobDrive(JobDrives job){
         job.setEligible_branches(
                 job.getEligible_branches().replace(" ", ",")
         );
+=======
+    public JobDrives createJobDrive(JobDrives job) {
+>>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return repo.save(job);
     }
-    public List<JobDrives> ViewAll(){
+
+    public List<JobDrives> ViewAll() {
         return repo.findAll();
     }
-    public JobDrives getJobDrives(Long id){
-        return repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+
+    public JobDrives getJobDrives(Long id) {
+        return repo.findById(id).orElseThrow(() -> new RuntimeException("Job Drives not found"));
     }
-    public JobDrives updateJobDrives(UpdateDrives drive, Long id){
-        JobDrives job = repo.findById(id).orElseThrow(()->new RuntimeException("Job Drives not found"));
+
+    public JobDrives updateJobDrives(UpdateDrives drive, Long id) {
+        JobDrives job = repo.findById(id).orElseThrow(() -> new RuntimeException("Job Drives not found"));
         job.setJob_role(drive.getJob_role());
         job.setPackage_lpa(drive.getPackage_lpa());
         job.setMin_cgpa(drive.getMin_cgpa());
@@ -40,13 +46,20 @@ public class JobDrivesService {
         repo.save(job);
         return job;
     }
-    public String deleteJobDrives(Long id){
+
+    public String deleteJobDrives(Long id) {
         repo.deleteById(id);
         return "Deleted successfully";
     }
+
     @Autowired
     StudentRepository studentRepository;
+<<<<<<< HEAD
     public List<Students> getVerifiedStudents(){
+=======
+
+    public List<Students> getEligibleStudents() {
+>>>>>>> cc03501fb93b7fc2896b565c98651e6027365612
         return studentRepository.getVerifiedStudents();
     }
 

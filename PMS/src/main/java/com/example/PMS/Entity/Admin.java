@@ -15,15 +15,15 @@ import lombok.Data;
 @Data
 public class Admin {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long admin_id;
 
     private String name;
 
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String phone_number;
 
     private String password_hash;

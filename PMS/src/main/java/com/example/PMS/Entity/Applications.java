@@ -17,9 +17,9 @@ import lombok.Data;
 public class Applications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long application_id;
+    private Long aid;
 
-    private Long student_id;
+    private Long sid;
 
     @ManyToOne
     @JoinColumn(name = "drive_id")
@@ -28,4 +28,3 @@ public class Applications {
     @CreationTimestamp
     private LocalDateTime applied_at;
 }
-
