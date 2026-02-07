@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.PMS.DTO.EligibleStudentDTO;
 import com.example.PMS.DTO.UpdateDrives;
+import com.example.PMS.Entity.Applications;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
+import com.example.PMS.Repository.ApplicationRepository;
 import com.example.PMS.Repository.JobDrivesRepository;
 import com.example.PMS.Repository.StudentRepository;
 @Service
@@ -56,11 +58,26 @@ public class JobDrivesService {
         return "Deleted successfully";
     }
 
-    public List<Students> getVerifiedStudents(){
-        return studentRepository.getVerifiedStudents();
+    public List<Students> getUnVerifiedStudents(){
+        return studentRepository.getUnVerifiedStudents();
     }
 
     public List<EligibleStudentDTO> getEligibleStudents(){
         return studentRepository.getEligibleStudents();
+    }
+    public List<JobDrives> getActive(){
+        return repo.findAllByActiveTrue();
+    }
+    public JobDrives closeDrive(Long Id){
+        JobDrives drive = repo.findById(Id).orElseThrow(()->new RuntimeException("Cant find the Id"));
+        drive.setActive(false);
+        repo.save(drive);
+        return drive;
+    } 
+
+    @Autowired
+    ApplicationRepository applications;
+    public List<Applications> findByDrive_Drive_id(Long driveId){
+        return applications.findByDrive_Drive_id(driveId);
     }
 }

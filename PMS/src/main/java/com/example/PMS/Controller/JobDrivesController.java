@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.PMS.DTO.EligibleStudentDTO;
 import com.example.PMS.DTO.UpdateDrives;
+import com.example.PMS.Entity.Applications;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Service.JobDrivesService;
@@ -52,13 +53,28 @@ public class JobDrivesController {
         return service.deleteJobDrives(driveId);
     }
 
-    @GetMapping("/verified-students")
-    public List<Students> getVerifiedStudents() {
-        return service.getVerifiedStudents();
-    }
+    @GetMapping("/Un-verified-students")
+    public List<Students> getUnVerifiedStudents() {
+        return service.getUnVerifiedStudents();
+    } 
 
     @GetMapping("/students/eligible")
     public List<EligibleStudentDTO> getEligibleStudents() {
         return service.getEligibleStudents();
     }
+
+    @GetMapping("/active")
+     public List<JobDrives> getActive(){
+        return service.getActive();
+     }
+
+     @PutMapping("/{id}/close")
+     public JobDrives closeDrive(@PathVariable Long Id){
+        return service.closeDrive(Id);
+     }
+
+     @GetMapping("/{driveId}/applications")
+     public List<Applications> findByDrive_Drive_id(@PathVariable Long driveId){
+        return service.findByDrive_Drive_id(driveId);
+     }
 }

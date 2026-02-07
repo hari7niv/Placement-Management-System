@@ -2,6 +2,7 @@ package com.example.PMS.Entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,8 @@ public class JobDrives {
     private Integer max_backlogs;
     private LocalDate drive_date;
     private LocalDate application_deadline;
-
+    @Column(nullable = false)
+    private Boolean active=true;
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Companies company;
@@ -35,3 +37,4 @@ public class JobDrives {
     @JoinColumn(name = "admin_id")
     private Admin created_by;
 }
+ 

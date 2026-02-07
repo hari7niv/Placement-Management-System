@@ -1,12 +1,19 @@
 package com.example.PMS.Controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.PMS.DTO.AdminLogin;
 import com.example.PMS.DTO.AdminUpdateStudents;
 import com.example.PMS.Entity.Admin;
 import com.example.PMS.Service.AdminService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -27,7 +34,7 @@ public class AdminController {
         return service.Adminlog(data.getEmail(), data.getPassword());
     }
 
-    @GetMapping("officers")
+    @GetMapping("/officers")
     public List<Admin> viewAdmins() {
         return service.viewAdmins();
     }

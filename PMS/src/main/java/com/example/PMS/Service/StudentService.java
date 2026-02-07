@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.PMS.DTO.LoginRequest;
 import com.example.PMS.DTO.UpdateProfileRequest;
+import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Repository.StudentRepository;
 
@@ -55,6 +56,9 @@ public class StudentService {
         student.setPhone_number(data.getPhone_number());
         student.setResume_link(data.getResume_link());
         return "Success";
+    }
+    public List<Companies> getEligibleCompanies(Long student_id){
+        return repo.getEligibleCompanies(student_id);
     }
 
 }

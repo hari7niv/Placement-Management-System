@@ -2,7 +2,10 @@ package com.example.PMS.Service;
 
 import com.example.PMS.DTO.UpdateCompany;
 import com.example.PMS.Entity.Companies;
+import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Repository.CompaniesRepository;
+
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +34,19 @@ public class CompaniesService {
         company.setCompany_name(entity.getCompany_name());
         company.setWebsite(entity.getWebsite());
         company.setContact_email(entity.getContact_email());
+        repo.save(company);
         return "Updated Successfully";
+    }
+    public String deleteCompany(Long id){
+        repo.deleteById(id);
+        return "Deleted Successfully";
+    }
+
+    public Companies getCompanyByName(String name){
+        return repo.findByName(name).orElseThrow(()->new RuntimeException("Invalid company name"));
+    }
+
+    public List<JobDrives> viewCompanyDrives(Long companyId){
+        return repo.viewCompanyDrives(companyId);
     }
 }

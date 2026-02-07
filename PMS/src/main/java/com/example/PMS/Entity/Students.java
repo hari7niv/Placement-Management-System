@@ -39,8 +39,8 @@ public class Students {
 
     private Integer backlog_count;// change panniruka da error varum apparam aluvada poi inda table a delete pannu ok va
     private String resume_link;
-
-    private Boolean is_verified;
+    @Column(nullable=false)
+    private Boolean is_verified=false;
 
     @CreationTimestamp
     private LocalDateTime created_at;
