@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.PMS.DTO.*;
@@ -35,4 +36,8 @@ public class ApplicationsController {
         return applicationService.getDet(aid);
     }
 
+    @PutMapping("/update/{aid}")
+    public String updateApplication(@PathVariable Long aid, @RequestBody Applications app) {
+        return applicationService.updateApplication(aid, app);
+    }
 }
