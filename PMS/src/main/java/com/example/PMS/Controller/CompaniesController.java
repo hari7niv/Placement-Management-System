@@ -6,7 +6,6 @@ import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Service.CompaniesService;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +50,7 @@ public class CompaniesController {
     }
 
     @GetMapping("/{companyId}/drives")
-    List<JobDrives> viewCompanyDrives(@PathVariable Long companyId){
+    public List<JobDrives> viewCompanyDrives(@PathVariable Long companyId){
         return service.viewCompanyDrives(companyId);
     }
 

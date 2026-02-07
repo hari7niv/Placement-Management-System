@@ -5,7 +5,6 @@ import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Repository.CompaniesRepository;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
