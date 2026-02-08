@@ -2,6 +2,10 @@ package com.example.PMS.Entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,9 +26,16 @@ public class ApplicationStatus {
     @JoinColumn(name = "application_id")
     private Applications application;
 
-    private String status;
+    @Column(nullable=false)
+    private String status = "APPLIED";
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 
     private String remarks;
 }
+// eeve ubtw mkba fzwe

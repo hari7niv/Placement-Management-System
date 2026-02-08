@@ -30,7 +30,7 @@ public class CompaniesService {
 
     public String  updateCompanies(UpdateCompany entity, Long id){
         Companies company = repo.findById(id).orElseThrow(()->new RuntimeException("Company does not exit"));
-        company.setCompany_name(entity.getCompany_name());
+        company.setCompanyName(entity.getCompany_name());
         company.setWebsite(entity.getWebsite());
         company.setContact_email(entity.getContact_email());
         repo.save(company);
@@ -42,7 +42,7 @@ public class CompaniesService {
     }
 
     public Companies getCompanyByName(String name){
-        return repo.findByName(name).orElseThrow(()->new RuntimeException("Invalid company name"));
+        return repo.findByCompanyName(name).orElseThrow(()->new RuntimeException("Invalid company name"));
     }
 
     public List<JobDrives> viewCompanyDrives(Long companyId){

@@ -9,5 +9,5 @@ import com.example.PMS.Entity.Applications;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Applications, Long> {
-    List<Applications> findByDrive_Drive_id(Long driveId);
+    List<Applications> findByDrive_DriveId(Long driveId);
 }

@@ -31,4 +31,6 @@ public interface StudentRepository extends JpaRepository<Students, Long> {
             """,nativeQuery=true)
     List<Companies> getEligibleCompanies(@Param("studentId") Long studentId);
 
+    Optional<Students> findByVerificationToken(String token);
+
 }
