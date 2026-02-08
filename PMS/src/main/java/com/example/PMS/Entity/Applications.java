@@ -30,4 +30,3 @@ public class Applications {
     @CreationTimestamp
     private LocalDateTime applied_at;
 }
- 
