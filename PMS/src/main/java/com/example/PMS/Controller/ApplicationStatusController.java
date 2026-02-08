@@ -1,5 +1,6 @@
 package com.example.PMS.Controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,10 @@ public class ApplicationStatusController {
     @PutMapping("/update/status/{status_id}")
     public String updateStatusOnly(@PathVariable Long status_id, @RequestParam String status) {
         return apps.updateStatusOnly(status_id, status);
+    }
+
+    @DeleteMapping("/del")
+    public String delete(@PathVariable Long status_id) {
+        return apps.delete(status_id);
     }
 }

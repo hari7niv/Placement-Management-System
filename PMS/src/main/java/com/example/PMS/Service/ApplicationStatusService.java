@@ -65,4 +65,12 @@ public class ApplicationStatusService {
         }
         return "NOT UPDATED\nERROR: INVALID STATUS VALUE";
     }
+
+    public String delete(Long sid) {
+        if (!repo.existsById(sid)) {
+            return "ID NOT FOUND";
+        }
+        repo.deleteById(sid);
+        return "DELETE PROCESSED SUCCESSFULLY";
+    }
 }
