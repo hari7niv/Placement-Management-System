@@ -49,4 +49,13 @@ public class ApplicationsService {
         }
 
     }
+
+    public String delete(Long aid) {
+        try {
+            appRepo.deleteById(aid);
+        } catch (Exception e) {
+            return "ERROR: ID NOT FOUND";
+        }
+        return "Delete Done";
+    }
 }
