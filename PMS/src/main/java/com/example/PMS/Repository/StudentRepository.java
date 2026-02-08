@@ -21,8 +21,9 @@ public interface StudentRepository extends JpaRepository<Students, Long> {
                          c.company_name from Students s join  job_drives j on 
                          s.cgpa>=j.min_cgpa and s.backlog_count <= j.max_backlogs and 
                          FIND_IN_SET(LOWER(s.branch), LOWER(j.eligible_branches)) JOIN companies c ON j.company_id = c.company_id
+                         where c.company_id = :companyId
                          """ ,nativeQuery = true)
-    List<EligibleStudentDTO> getEligibleStudents();
+    List<EligibleStudentDTO> getEligibleStudents(@Param("companyId") Long companyId);
 
     @Query(value = """
             Select Distinct c.*  from Company c join job_drives j on j.company_id = c.company_id

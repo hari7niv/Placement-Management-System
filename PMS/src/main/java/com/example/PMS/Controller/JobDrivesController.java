@@ -2,6 +2,7 @@ package com.example.PMS.Controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class JobDrivesController {
     public JobDrives createJobDrive(@RequestBody JobDrives job) {
         return service.createJobDrive(job);
     }
-
+ 
     @GetMapping
     public List<JobDrives> ViewAll() {
         return service.ViewAll();
@@ -44,13 +45,15 @@ public class JobDrivesController {
     }
 
     @PutMapping("/{driveId}")
-    public JobDrives updateJobDrives(@RequestBody UpdateDrives drive, @PathVariable Long driveId) {
-        return service.updateJobDrives(drive, driveId);
+    public ResponseEntity<Void> updateJobDrives(@RequestBody UpdateDrives drive, @PathVariable Long driveId) {
+        service.updateJobDrives(drive, driveId);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{driveId}")
-    public String deleteJobDrives(@PathVariable Long driveId) {
-        return service.deleteJobDrives(driveId);
+    public ResponseEntity<Void> deleteJobDrives(@PathVariable Long driveId) {
+         service.deleteJobDrives(driveId);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/Un-verified-students")
@@ -58,9 +61,9 @@ public class JobDrivesController {
         return service.getUnVerifiedStudents();
     } 
 
-    @GetMapping("/students/eligible")
-    public List<EligibleStudentDTO> getEligibleStudents() {
-        return service.getEligibleStudents();
+    @GetMapping("/students/eligible/{id}")
+    public List<EligibleStudentDTO> getEligibleStudents(@PathVariable Long id) {
+        return service.getEligibleStudents(id);
     }
 
     @GetMapping("/active")
@@ -69,8 +72,8 @@ public class JobDrivesController {
      }
 
      @PutMapping("/{id}/close")
-     public JobDrives closeDrive(@PathVariable Long Id){
-        return service.closeDrive(Id);
+     public JobDrives closeDrive(@PathVariable Long id){
+        return service.closeDrive(id);
      }
 
      @GetMapping("/{driveId}/applications")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import com.example.PMS.DTO.UpdateProfileRequest;
 import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Repository.StudentRepository;
+import com.example.PMS.Security.JwtService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class StudentService {
@@ -35,16 +39,17 @@ public class StudentService {
         return repo.save(entity);
     }
 
-    public String verify(String token) {
+    public void verify(String token) {
     Students user = repo.findByVerificationToken(token)
         .orElseThrow(() -> new RuntimeException("Invalid token"));
 
     user.setEnabled(true);
     user.setVerificationToken(null);
     repo.save(user);
-
-    return "Email verified. You may now log in.";
     }
+
+    @Autowired
+    JwtService jwtService;
 
     public String login(LoginRequest entity) {
         Students student = repo.findByEmail(entity.getEmail())
@@ -54,7 +59,7 @@ public class StudentService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        return "Login successful for: " + student.getFirst_name();
+         return jwtService.generateToken(student.getEmail(), "STUDENT");
     }
 
     public List<Students> getAllStudents() {
@@ -65,7 +70,8 @@ public class StudentService {
         return repo.findByEmail(email).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
-    public String UpdateProfile(UpdateProfileRequest data,Long id){
+    @Transactional
+    public void  UpdateProfile(UpdateProfileRequest data,Long id){
         Students student = repo.findById(id).orElseThrow(()->new RuntimeException("Cant find the id"));
         student.setFirst_name(data.getFirst_name());
         student.setBranch(data.getBranch());
@@ -73,8 +79,9 @@ public class StudentService {
         student.setLast_name(data.getLast_name());
         student.setPhone_number(data.getPhone_number());
         student.setResume_link(data.getResume_link());
-        return "Success";
+        
     }
+
     public List<Companies> getEligibleCompanies(Long student_id){
         return repo.getEligibleCompanies(student_id);
     }

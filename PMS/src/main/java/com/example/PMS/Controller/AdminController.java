@@ -2,6 +2,7 @@ package com.example.PMS.Controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,10 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public String Adminlog(@RequestBody AdminLogin data) {
-        return service.Adminlog(data.getEmail(), data.getPassword());
+    public ResponseEntity<Void> Adminlog(@RequestBody AdminLogin data) {
+        service.Adminlog(data);
+        return ResponseEntity.noContent().build();                    
+
     }
 
     @GetMapping("/officers")
@@ -40,18 +43,23 @@ public class AdminController {
     }
 
     @PostMapping("/students/{studentId}/verify")
-    public String verifyStudent(@PathVariable Long studentId) {
-        return service.verifyStudent(studentId);
+    public ResponseEntity<Void> verifyStudent(@PathVariable Long studentId) {
+        service.verifyStudent(studentId);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/students/{studentId}/reject")
-    public String rejectStudent(@PathVariable Long studentId) {
-        return service.rejectStudent(studentId);
+    public ResponseEntity<Void> rejectStudent(@PathVariable Long studentId) {
+        service.rejectStudent(studentId);
+        return ResponseEntity.noContent().build();                    
+
     }
 
-    @PutMapping("/students/update/{studentId}")
-    public String updateStudent(@RequestBody AdminUpdateStudents data, Long id) {
-        return service.updateStudent(data, id);
+    @PutMapping("/students/update/{id}")
+    public ResponseEntity<Void> updateStudent(@RequestBody AdminUpdateStudents data,@PathVariable Long id) {
+        service.updateStudent(data, id);
+        return ResponseEntity.noContent().build();                    
+
     }
 
 }

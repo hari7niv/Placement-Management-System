@@ -1,14 +1,22 @@
 package com.example.PMS.Controller;
 
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.PMS.DTO.UpdateCompany;
 import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Service.CompaniesService;
-
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
@@ -29,24 +37,29 @@ public class CompaniesController {
         return service.viewCompanies();
     }
  
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public Companies getCompanies(@PathVariable Long id){
         return service.getCompanies(id);
     }
 
     @PutMapping("/update/{id}")
-    public String  updateCompanies(@RequestBody UpdateCompany entity, @PathVariable Long id){
-        return service.updateCompanies(entity,id);
+    public ResponseEntity<Void>  updateCompanies(@RequestBody UpdateCompany entity, @PathVariable Long id){
+        service.updateCompanies(entity,id);
+                return ResponseEntity.noContent().build();                    
+
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCompany(@PathVariable Long id){
-        return service.deleteCompany(id);
+    public ResponseEntity<Void> deleteCompany(@PathVariable Long id){
+        service.deleteCompany(id);
+                return ResponseEntity.noContent().build();                    
+
     }
 
     @GetMapping("/search/{name}")
     public Companies getCompanyByName(@PathVariable String name){
         return service.getCompanyByName(name);
+        
     }
 
     @GetMapping("/{companyId}/drives")

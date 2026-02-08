@@ -5,6 +5,8 @@ import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Repository.CompaniesRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,18 +29,17 @@ public class CompaniesService {
     public Companies getCompanies(Long id){
         return repo.findById(id).orElseThrow(()->new RuntimeException("Company does not exit"));
     }
-
-    public String  updateCompanies(UpdateCompany entity, Long id){
+    @Transactional
+    public void updateCompanies(UpdateCompany entity, Long id){
         Companies company = repo.findById(id).orElseThrow(()->new RuntimeException("Company does not exit"));
         company.setCompanyName(entity.getCompany_name());
         company.setWebsite(entity.getWebsite());
         company.setContact_email(entity.getContact_email());
-        repo.save(company);
-        return "Updated Successfully";
+        
     }
-    public String deleteCompany(Long id){
+
+    public void  deleteCompany(Long id){
         repo.deleteById(id);
-        return "Deleted Successfully";
     }
 
     public Companies getCompanyByName(String name){

@@ -2,6 +2,7 @@ package com.example.PMS.Controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,12 +32,13 @@ public class StudentController {
         return service.register(entity);
     }
     @GetMapping("/verify")
-    public String verify(@RequestParam String token) {
-        return service.verify(token);                    
+    public ResponseEntity<Void> verify(@RequestParam String token) {
+        service.verify(token);
+        return ResponseEntity.noContent().build();                    
     }
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest entity) {
-        return service.login(entity);
+    public ResponseEntity<String> login(@RequestBody LoginRequest entity) {
+        return ResponseEntity.ok(service.login(entity));
     }
     @GetMapping("/list")
     public List<Students> get(){
@@ -49,8 +51,9 @@ public class StudentController {
     }
 
     @PutMapping("/profile/update/{id}")
-    public String UpdateProfile(UpdateProfileRequest data,@PathVariable Long id){
-        return service.UpdateProfile(data,id);
+    public ResponseEntity<String> UpdateProfile(@RequestBody UpdateProfileRequest data,@PathVariable Long id){
+        service.UpdateProfile(data,id);
+        return ResponseEntity.noContent().build();
     }
     @GetMapping("{id}/drives/eligible")
     public List<Companies> getEligibleCompanies(@PathVariable Long id){
