@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +40,10 @@ public class ApplicationsController {
     @PutMapping("/update/{aid}")
     public String updateApplication(@PathVariable Long aid, @RequestBody Applications app) {
         return applicationService.updateApplication(aid, app);
+    }
+
+    @DeleteMapping("/delete/{aid}")
+    public String delete(@PathVariable Long aid) {
+        return applicationService.delete(aid);
     }
 }
