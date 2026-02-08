@@ -2,6 +2,8 @@ package com.example.PMS.Entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class ApplicationStatus {
 
     private String status;
 
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 
     private String remarks;
