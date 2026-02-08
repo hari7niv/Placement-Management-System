@@ -2,11 +2,17 @@ package com.example.PMS.Controller;
 
 import java.util.List;
 
-import com.example.PMS.DTO.UpdateProfileRequest;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.PMS.DTO.LoginRequest;
+import com.example.PMS.DTO.UpdateProfileRequest;
 import com.example.PMS.Entity.Companies;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Service.StudentService;
@@ -21,7 +27,12 @@ public class StudentController {
 
     @PostMapping("/register")
     public Students register(@RequestBody Students entity) {
+       
         return service.register(entity);
+    }
+    @GetMapping("/verify")
+    public String verify(@RequestParam String token) {
+        return service.verify(token);                    
     }
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest entity) {

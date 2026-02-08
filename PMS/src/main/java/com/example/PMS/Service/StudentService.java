@@ -1,6 +1,7 @@
 package com.example.PMS.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,18 +21,35 @@ public class StudentService {
     }
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    EmailService emailSender;
     public Students register(Students entity) {
         String encodedPassword = passwordEncoder.encode(entity.getPassword_hash());
         entity.setPassword_hash(encodedPassword);
+        String token = UUID.randomUUID().toString();
+        entity.setEnabled(false);
+        entity.setVerificationToken(token);
+        String link = " http://localhost:8080/students/verify?token=" + token;
+        emailSender.sendSimpleEmail(entity.getEmail(),"Verify Email",("Click the link to verify"+link));
+
         return repo.save(entity);
     }
 
-    public String login(LoginRequest entity) {
+    public String verify(String token) {
+    Students user = repo.findByVerificationToken(token)
+        .orElseThrow(() -> new RuntimeException("Invalid token"));
 
+    user.setEnabled(true);
+    user.setVerificationToken(null);
+    repo.save(user);
+
+    return "Email verified. You may now log in.";
+    }
+
+    public String login(LoginRequest entity) {
         Students student = repo.findByEmail(entity.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-
+        if(!student.isEnabled()){throw new RuntimeException("Verify your email first");}
         if (!passwordEncoder.matches(entity.getPassword(), student.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
         }

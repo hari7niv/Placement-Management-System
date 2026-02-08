@@ -78,6 +78,6 @@ public class JobDrivesService {
     @Autowired
     ApplicationRepository applications;
     public List<Applications> findByDrive_Drive_id(Long driveId){
-        return applications.findByDrive_Drive_id(driveId);
+        return applications.findByDrive_DriveId(driveId);
     }
 }

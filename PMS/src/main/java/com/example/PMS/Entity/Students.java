@@ -45,6 +45,9 @@ public class Students {
     @CreationTimestamp
     private LocalDateTime created_at;
 
+    private boolean enabled = false;
+    private String verificationToken;
+
 }
 
 

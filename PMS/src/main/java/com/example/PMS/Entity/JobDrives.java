@@ -18,7 +18,7 @@ public class JobDrives {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long drive_id;
+    private Long driveId;
 
     private String job_role;
     private Integer package_lpa;
