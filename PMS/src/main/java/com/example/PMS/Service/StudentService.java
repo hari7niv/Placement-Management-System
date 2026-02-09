@@ -60,15 +60,12 @@ public class StudentService {
     public String login(LoginRequest entity) {
         Students student = repo.findByEmail(entity.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-<<<<<<< HEAD
         if (!student.isEnabled()) {
             throw new RuntimeException("Verify your email first");
         }
-=======
 
         if(!student.isEnabled()){throw new RuntimeException("Verify your email first");}
 
->>>>>>> 729fb41188ff1031757e8bb770f436ff637286dc
         if (!passwordEncoder.matches(entity.getPassword(), student.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
         }      

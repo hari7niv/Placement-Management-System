@@ -3,10 +3,6 @@ package com.example.PMS.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
-
->>>>>>> 729fb41188ff1031757e8bb770f436ff637286dc
 import org.springframework.stereotype.Service;
 
 import com.example.PMS.DTO.EligibleStudentDTO;
