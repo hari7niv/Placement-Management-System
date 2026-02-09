@@ -23,15 +23,16 @@ public class AdminService {
         this.repo = repo;
     }
 
-   @Autowired
-   private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Admin createAdmin(Admin admin) {
-       String encodedPassword = passwordEncoder.encode(admin.getPassword_hash());
-       admin.setPassword_hash(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(admin.getPassword_hash());
+        admin.setPassword_hash(encodedPassword);
         return repo.save(admin);
     }
 
-    public void  Adminlog(AdminLogin entity) {
+    public void Adminlog(AdminLogin entity) {
 
         Admin admin = repo.findByEmail(entity.getEmail()).orElseThrow(() -> new RuntimeException("Admin not found "));
         if (!passwordEncoder.matches(entity.getPassword(), admin.getPassword_hash())) {
@@ -53,14 +54,14 @@ public class AdminService {
         return "student " + students.getFirst_name() + " verified";
     }
 
-    public void  rejectStudent(Long id) {
+    public void rejectStudent(Long id) {
         Students students = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invalid Student Id"));
         students.setIs_verified(false);
     }
-    
+
     @Transactional
-    public void  updateStudent(AdminUpdateStudents data, Long id) {
+    public void updateStudent(AdminUpdateStudents data, Long id) {
         Students students = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invalid Student Id"));
         students.setBranch(data.getBranch());
