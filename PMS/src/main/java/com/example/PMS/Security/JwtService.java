@@ -2,10 +2,14 @@ package com.example.PMS.Security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 
 @Service
 public class JwtService {
@@ -43,5 +47,13 @@ public class JwtService {
 
     public String extractRole(String token) {
         return extractClaims(token).get("role", String.class);
+    }
+
+    String extractUsername(String token) {
+        return extractClaims(token).getSubject();
+    }
+    public List<GrantedAuthority> extractAuthorities(String token){
+        String role = extractClaims(token).get("role",String.class);
+        return List.of(new SimpleGrantedAuthority("ROLE_"+  role));
     }
 }

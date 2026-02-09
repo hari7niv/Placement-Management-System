@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +54,12 @@ public class StudentService {
     public String login(LoginRequest entity) {
         Students student = repo.findByEmail(entity.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+
         if(!student.isEnabled()){throw new RuntimeException("Verify your email first");}
+
         if (!passwordEncoder.matches(entity.getPassword(), student.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
-        }
+        }      
 
          return jwtService.generateToken(student.getEmail(), "STUDENT");
     }
