@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
-
->>>>>>> 729fb41188ff1031757e8bb770f436ff637286dc
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,11 +60,13 @@ public class StudentService {
             throw new RuntimeException("Verify your email first");
         }
 
-        if(!student.isEnabled()){throw new RuntimeException("Verify your email first");}
+        if (!student.isEnabled()) {
+            throw new RuntimeException("Verify your email first");
+        }
 
         if (!passwordEncoder.matches(entity.getPassword(), student.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
-        }      
+        }
 
         return jwtService.generateToken(student.getEmail(), "STUDENT");
     }

@@ -34,7 +34,7 @@ public class OffersController {
     }
 
     @PutMapping("/update/{oid}")
-    public String update(@PathVariable Long oid, @RequestBody Offers os) {
-        return os.update(oid, os);
+    public String update(@PathVariable Long oid, @RequestBody Offers off) {
+        return os.update(oid, off);
     }
 }
