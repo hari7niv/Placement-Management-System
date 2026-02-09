@@ -34,4 +34,12 @@ public class OffersService {
         }
         return "ID NOT FOUND";
     }
+
+    public String delete(Long oid) {
+        if (repo.existsById(oid)) {
+            repo.deleteById(oid);
+            return "DELETED SUCCESSFULLY";
+        }
+        return "ID NOT FOUND";
+    }
 }
