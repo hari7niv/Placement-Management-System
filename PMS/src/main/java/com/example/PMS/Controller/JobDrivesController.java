@@ -3,6 +3,7 @@ package com.example.PMS.Controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.example.PMS.Entity.JobDrives;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Service.JobDrivesService;
 
+@PreAuthorize("hasRole('ADMIN')")
 @RestController
 @RequestMapping("/drives")
 public class JobDrivesController {

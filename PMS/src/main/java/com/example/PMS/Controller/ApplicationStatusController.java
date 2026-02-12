@@ -1,5 +1,6 @@
 package com.example.PMS.Controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,27 +25,32 @@ public class ApplicationStatusController {
         this.apps = apps;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addStatus(@RequestBody ApplicationStatus app) {
         return apps.addStatus(app);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/get/{status_id}")
     public ApplicationStatusDTO getStatus(@PathVariable Long status_id) {
         return apps.getStatus(status_id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{status_id}")
     public String updateStatus(@PathVariable Long status_id, @RequestBody ApplicationStatusDTO app) {
         return apps.updateStatus(status_id, app);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/status/{status_id}")
     public String updateStatusOnly(@PathVariable Long status_id, @RequestParam String status) {
         return apps.updateStatusOnly(status_id, status);
     }
 
-    @DeleteMapping("/del")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{status_id}")
     public String delete(@PathVariable Long status_id) {
         return apps.delete(status_id);
     }
