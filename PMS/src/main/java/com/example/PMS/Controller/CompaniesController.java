@@ -44,9 +44,9 @@ public class CompaniesController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Void>  updateCompanies(@RequestBody UpdateCompany entity, @PathVariable Long id){
+        
         service.updateCompanies(entity,id);
                 return ResponseEntity.noContent().build();                    
-
     }
 
     @DeleteMapping("/{id}")

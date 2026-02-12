@@ -12,6 +12,7 @@ import com.example.PMS.Entity.Admin;
 import com.example.PMS.Entity.Students;
 import com.example.PMS.Repository.AdminRepository;
 import com.example.PMS.Repository.StudentRepository;
+import com.example.PMS.Security.JwtService;
 
 import jakarta.transaction.Transactional;
 
@@ -31,13 +32,15 @@ public class AdminService {
         admin.setPassword_hash(encodedPassword);
         return repo.save(admin);
     }
-
-    public void Adminlog(AdminLogin entity) {
+    @Autowired
+    JwtService jwtService;
+    public String Adminlog(AdminLogin entity) {
 
         Admin admin = repo.findByEmail(entity.getEmail()).orElseThrow(() -> new RuntimeException("Admin not found "));
         if (!passwordEncoder.matches(entity.getPassword(), admin.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
         }
+        return jwtService.generateToken(admin.getEmail(), "ADMIN");
     }
 
     public List<Admin> viewAdmins() {

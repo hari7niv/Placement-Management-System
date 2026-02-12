@@ -29,16 +29,18 @@ public class JobDrivesService {
     }
 
     public JobDrives createJobDrive(JobDrives job){
+        job.setEligible_branches(
+                job.getEligible_branches().replace(" ", ",")
+        );
+        JobDrives jobs = repo.save(job);
         List<EligibleStudentDTO> students= studentRepository.getEligibleStudents(job.getCompany().getCompany_id());
         for (EligibleStudentDTO student : students) {
             String subject = student.getCompanyName() +" has posted a job";
             String body = student.getFirstName()+" "+student.getLastName() + ", you are eligible to apply in "+student.getCompanyName()+" if you are interested in this company you may apply";
             emailSender.sendSimpleEmail(student.getEmail(), subject,body);
         }
-        job.setEligible_branches(
-                job.getEligible_branches().replace(" ", ",")
-        );
-        return repo.save(job);
+        
+        return jobs;
     }
 
     public List<JobDrives> ViewAll() {

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,7 @@ public class StudentService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     EmailService emailSender;
+    
     public Students register(Students entity) {
         String encodedPassword = passwordEncoder.encode(entity.getPassword_hash());
         entity.setPassword_hash(encodedPassword);
@@ -86,6 +86,10 @@ public class StudentService {
 
     public List<Companies> getEligibleCompanies(Long student_id){
         return repo.getEligibleCompanies(student_id);
+    }
+
+    public Students getStudentsFromEmail(String email){
+        return repo.findByEmail(email).orElseThrow(()->new RuntimeException("email not found"));
     }
 
 }

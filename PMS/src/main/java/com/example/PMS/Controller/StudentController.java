@@ -3,8 +3,8 @@ package com.example.PMS.Controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +32,9 @@ public class StudentController {
         return service.register(entity);
     }
     @GetMapping("/verify")
-    public ResponseEntity<Void> verify(@RequestParam String token) {
+    public ResponseEntity<String> verify(@RequestParam String token) {
         service.verify(token);
-        return ResponseEntity.noContent().build();                    
+        return ResponseEntity.ok("Account Verified");                   
     }
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest entity) {
@@ -45,18 +45,26 @@ public class StudentController {
         return service.getAllStudents();
     }
 
-    @GetMapping("/profile/{email}")
-    public Students viewProfile(@PathVariable String email){
+    @GetMapping("/profile")
+    public Students viewProfile(){
+        String email = SecurityContextHolder
+        .getContext()
+        .getAuthentication()
+        .getName();
         return service.viewProfile(email);
     }
 
-    @PutMapping("/profile/update/{id}")
-    public ResponseEntity<String> UpdateProfile(@RequestBody UpdateProfileRequest data,@PathVariable Long id){
-        service.UpdateProfile(data,id);
+    @PutMapping("/profile/update")
+    public ResponseEntity<String> UpdateProfile(@RequestBody UpdateProfileRequest data){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Students student = service.getStudentsFromEmail(email);
+        service.UpdateProfile(data,student.getStudent_id());
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("{id}/drives/eligible")
-    public List<Companies> getEligibleCompanies(@PathVariable Long id){
-        return service.getEligibleCompanies(id);
+    @GetMapping("/drives/eligible")
+    public List<Companies> getEligibleCompanies(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Students student = service.getStudentsFromEmail(email);
+        return service.getEligibleCompanies(student.getStudent_id());
     }
 }
