@@ -19,14 +19,16 @@ import jakarta.transaction.Transactional;
 @Service
 public class StudentService {
     final StudentRepository repo;
+
     public StudentService(StudentRepository repo) {
         this.repo = repo;
     }
+
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     EmailService emailSender;
-    
+
     public Students register(Students entity) {
         String encodedPassword = passwordEncoder.encode(entity.getPassword_hash());
         entity.setPassword_hash(encodedPassword);
@@ -34,18 +36,18 @@ public class StudentService {
         entity.setEnabled(false);
         entity.setVerificationToken(token);
         String link = " http://localhost:8080/students/verify?token=" + token;
-        emailSender.sendSimpleEmail(entity.getEmail(),"Verify Email",("Click the link to verify"+link));
+        emailSender.sendSimpleEmail(entity.getEmail(), "Verify Email", ("Click the link to verify" + link));
 
         return repo.save(entity);
     }
 
     public void verify(String token) {
-    Students user = repo.findByVerificationToken(token)
-        .orElseThrow(() -> new RuntimeException("Invalid token"));
+        Students user = repo.findByVerificationToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
 
-    user.setEnabled(true);
-    user.setVerificationToken(null);
-    repo.save(user);
+        user.setEnabled(true);
+        user.setVerificationToken(null);
+        repo.save(user);
     }
 
     @Autowired
@@ -54,14 +56,19 @@ public class StudentService {
     public String login(LoginRequest entity) {
         Students student = repo.findByEmail(entity.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+        if (!student.isEnabled()) {
+            throw new RuntimeException("Verify your email first");
+        }
 
-        if(!student.isEnabled()){throw new RuntimeException("Verify your email first");}
+        if (!student.isEnabled()) {
+            throw new RuntimeException("Verify your email first");
+        }
 
         if (!passwordEncoder.matches(entity.getPassword(), student.getPassword_hash())) {
             throw new RuntimeException("Invalid email or password");
-        }      
+        }
 
-         return jwtService.generateToken(student.getEmail(), "STUDENT");
+        return jwtService.generateToken(student.getEmail(), "STUDENT");
     }
 
     public List<Students> getAllStudents() {
@@ -73,18 +80,18 @@ public class StudentService {
     }
 
     @Transactional
-    public void  UpdateProfile(UpdateProfileRequest data,Long id){
-        Students student = repo.findById(id).orElseThrow(()->new RuntimeException("Cant find the id"));
+    public void UpdateProfile(UpdateProfileRequest data, Long id) {
+        Students student = repo.findById(id).orElseThrow(() -> new RuntimeException("Cant find the id"));
         student.setFirst_name(data.getFirst_name());
         student.setBranch(data.getBranch());
         student.setCgpa(data.getCgpa());
         student.setLast_name(data.getLast_name());
         student.setPhone_number(data.getPhone_number());
         student.setResume_link(data.getResume_link());
-        
+
     }
 
-    public List<Companies> getEligibleCompanies(Long student_id){
+    public List<Companies> getEligibleCompanies(Long student_id) {
         return repo.getEligibleCompanies(student_id);
     }
 

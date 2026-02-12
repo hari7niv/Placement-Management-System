@@ -3,7 +3,6 @@ package com.example.PMS.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import com.example.PMS.DTO.EligibleStudentDTO;
@@ -16,6 +15,7 @@ import com.example.PMS.Repository.JobDrivesRepository;
 import com.example.PMS.Repository.StudentRepository;
 
 import jakarta.transaction.Transactional;
+
 @Service
 public class JobDrivesService {
 
@@ -35,9 +35,10 @@ public class JobDrivesService {
         JobDrives jobs = repo.save(job);
         List<EligibleStudentDTO> students= studentRepository.getEligibleStudents(job.getCompany().getCompany_id());
         for (EligibleStudentDTO student : students) {
-            String subject = student.getCompanyName() +" has posted a job";
-            String body = student.getFirstName()+" "+student.getLastName() + ", you are eligible to apply in "+student.getCompanyName()+" if you are interested in this company you may apply";
-            emailSender.sendSimpleEmail(student.getEmail(), subject,body);
+            String subject = student.getCompanyName() + " has posted a job";
+            String body = student.getFirstName() + " " + student.getLastName() + ", you are eligible to apply in "
+                    + student.getCompanyName() + " if you are interested in this company you may apply";
+            emailSender.sendSimpleEmail(student.getEmail(), subject, body);
         }
         
         return jobs;
@@ -51,6 +52,7 @@ public class JobDrivesService {
         return repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Job Drives not found"));
     }
+
     @Transactional
     public void updateJobDrives(UpdateDrives drive, Long id) {
 
@@ -68,32 +70,33 @@ public class JobDrivesService {
         repo.deleteById(id);
     }
 
-    public List<Students> getUnVerifiedStudents(){
+    public List<Students> getUnVerifiedStudents() {
         return studentRepository.getUnVerifiedStudents();
     }
-    
+
     @Autowired
     EmailService emailSender;
 
-    public List<EligibleStudentDTO> getEligibleStudents(Long id){
-
-
+    public List<EligibleStudentDTO> getEligibleStudents(Long id) {
 
         return studentRepository.getEligibleStudents(id);
-    } 
-    public List<JobDrives> getActive(){
+    }
+
+    public List<JobDrives> getActive() {
         return repo.findAllByActiveTrue();
     }
-    public JobDrives closeDrive(Long Id){
-        JobDrives drive = repo.findById(Id).orElseThrow(()->new RuntimeException("Cant find the Id"));
+
+    public JobDrives closeDrive(Long Id) {
+        JobDrives drive = repo.findById(Id).orElseThrow(() -> new RuntimeException("Cant find the Id"));
         drive.setActive(false);
         repo.save(drive);
         return drive;
-    } 
+    }
 
     @Autowired
     ApplicationRepository applications;
-    public List<Applications> findByDrive_Drive_id(Long driveId){
+
+    public List<Applications> findByDrive_Drive_id(Long driveId) {
         return applications.findByDrive_DriveId(driveId);
     }
 }

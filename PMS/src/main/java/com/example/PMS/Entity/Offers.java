@@ -3,6 +3,8 @@ package com.example.PMS.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.example.PMS.DTO.OffersDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,4 +32,9 @@ public class Offers {
     private LocalDate offer_date;
 
     private Boolean accepted;
+
+    public OffersDTO toDTO() {
+        OffersDTO dto = new OffersDTO(offer_letter_url, offered_package, offer_date, accepted);
+        return dto;
+    }
 }
